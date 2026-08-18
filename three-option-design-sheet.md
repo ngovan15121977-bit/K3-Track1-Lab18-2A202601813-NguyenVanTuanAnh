@@ -1,14 +1,8 @@
----
+# AI Support Log (Khai báo sử dụng AI)
 
-### 2. `three-option-design-sheet.md`
-
-```markdown
-# Three-Option Design Sheet
-
+**Học viên:** Nguyễn Văn Tuấn Anh (MHV: 2A202601813)  
 **Nhóm:** Chicken Plus  
-**Thành viên:** Phạm Bá Huy (2A202601132) & Nguyễn Văn Tuấn Anh (2A202601813)
-
----
+**Bài lab:** Track 1 - Day 18 (Multiple Prototypes - Human–AI design)
 
 ## 1. Hypothesis Problem & Comparison Contract
 
