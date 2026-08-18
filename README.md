@@ -37,9 +37,15 @@
 
 | Option | Tên | Cơ chế chính | Link prototype |
 |--------|-----|--------------|----------------|
-| **A** | Socratic Hints AI | AI chẩn đoán bug → chuỗi câu hỏi gợi mở, không cho đáp án sẵn | Xem `prototype-link.md` |
-| **B** | Contextual Explainer | User bôi đen đoạn code/video → AI giải thích đúng phạm vi được chọn | Xem `prototype-link.md` |
-| **C** | Fast SLA Q&A | Gửi ticket cho TA người thật, cam kết phản hồi ≤ 30 phút (0% generative AI) | Xem `prototype-link.md` |
+| **A** | Socratic Hints AI | AI chẩn đoán bug → chuỗi câu hỏi gợi mở, không cho đáp án sẵn | [prototype/](https://github.com/phambahuycv/K4-Track1-Lab17-2A202601132-PhamBaHuy/tree/main/prototype) |
+| **B** | Contextual Explainer | User bôi đen đoạn code/video → AI giải thích đúng phạm vi được chọn | Cùng link trên (tab Option B) |
+| **C** | Fast SLA Q&A | Gửi ticket cho TA người thật, cam kết phản hồi ≤ 30 phút (0% generative AI) | Cùng link trên (tab Option C) |
+
+**Prototype chung nhóm:**  
+https://github.com/phambahuycv/K4-Track1-Lab17-2A202601132-PhamBaHuy/tree/main/prototype  
+
+Cách mở: clone repo → mở `prototype/index.html` bằng trình duyệt (hoặc `npx -y serve prototype`).  
+Có sẵn **9 Test Cases** (3 option × Happy Path / Uncertainty / Control-Recovery). Chi tiết: `prototype-link.md` + `prototype/README.md` trong repo Huy.
 
 Chi tiết so sánh mechanism, agency, trade-off và Human–AI Decision Table: xem file `three-option-design-sheet.md`.
 
@@ -52,7 +58,8 @@ Chi tiết so sánh mechanism, agency, trade-off và Human–AI Decision Table: 
   - Cùng Huy chốt Hypothesis Problem từ 2 Practice Notes Day 17 (Evidence Huddle).
   - Cùng xây Comparison Contract (user, situation, task, content fixture `useEffect` bug).
   - Tham gia Human–AI Design Pass cho cả 3 options (Expectation, Agency, Evidence/Uncertainty, Control & Recovery).
-  - Viết / chuẩn hóa `Day18_CP1`, `Day18_CP2`, `Day18_CP3` và chuyển thành Design Sheet.
+  - Viết / chuẩn hóa Design Sheet và các artifact Day 18.
+  - Dùng chung **prototype web A/B/C** do Huy build (repo `phambahuycv/K4-Track1-Lab17-.../prototype`) — có 9 test cases + facilitator notes + reset path.
 - **Facilitation & quan sát:** Facilitate 1 phiên A/B/C test với tester ngoài nhóm; ghi `prototype-feedback-note.md`.
 - **Tổng hợp:** Đóng góp vào `group-feedback-synthesis.md` (pattern, Next Change, Still Unproven).
 
