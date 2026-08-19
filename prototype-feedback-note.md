@@ -1,80 +1,114 @@
-# Group Feedback Synthesis — Day 18
+# Prototype Feedback Note — Tổng Hợp Phiên Test 3 Người Dùng
 
+**Facilitator:** Phạm Bá Huy (MHV: `2A202601132`)  
+**Đồng hành:** Nguyễn Văn Tuấn Anh (MHV: `2A202601813`)  
 **Nhóm:** Chicken Plus  
-**Thành viên:** Nguyễn Văn Tuấn Anh (MHV: `2A202601813`), Phạm Bá Huy (MHV: `2A202601132`)  
-**Nguồn:** 3 Feedback Notes độc lập từ 3 Tester ngoài nhóm:
-1. **Hoàng Văn Thành** (MHV: `2A202601428`) — Tester 1
-2. **Bùi Hữu Nghĩa** (MHV: `2A202601880`) — Tester 2
-3. **Nguyễn Quang Minh** (MHV: `2A202601955`) — Tester 3  
 **Case:** AI Support Radar trên nền tảng VLearn (`useEffect` React Hooks)  
-**Ngày cập nhật:** 19/08/2026  
+**Ngày test / cập nhật:** 19/08/2026  
+**Thứ tự trải nghiệm chuẩn:** A → B → C (Cùng chung Context, Task và Code fixture)  
 
 ---
 
-## 1. Bảng Tổng Hợp Đối Chiếu 3 Feedback (Cross-Feedback Matrix)
+## 1. Context & Task Chung Đã Dùng
 
-| Tiêu chí | Feedback 1 (Hoàng Văn Thành - 2A202601428) | Feedback 2 (Bùi Hữu Nghĩa - 2A202601880) | Feedback 3 (Nguyễn Quang Minh - 2A202601955) | Pattern & Khác biệt chung |
-| :--- | :--- | :--- | :--- | :--- |
-| **Profile Tester** | Học viên có kinh nghiệm, thích bài toán nâng cao. | Học viên trực quan, chú trọng tốc độ sửa lỗi. | Học viên tự học, thích phương pháp gợi mở tư duy. | Đại diện cho các mức độ tiếp thu và phong cách học khác nhau. |
-| **First Action** | Đọc Test Runner, kiểm tra cấu trúc code xung quanh. | Chạy Test Runner, bôi đen thử dòng lỗi 15. | Bấm ngay *“Cần gợi ý tư duy”*, đọc kỹ micro-copy. | **100% Tester** nhìn vào bảng lỗi Test Case trước khi dùng AI. |
-| **Đánh giá Option A** | AI bị giới hạn, muốn hỏi rộng ra các đoạn code xung quanh. | Thấy hay nhưng mắt phải đảo qua lại để tìm AI phản hồi. | **Rất thích ý tưởng gợi mở**, muốn lấy giải pháp áp dụng ngay. | Option A tạo ấn tượng mạnh về giá trị tư duy lâu dài. |
-| **Đánh giá Option B** | Thấy nhanh nhưng chỉ giải quyết được lỗi cục bộ. | **Đánh giá rất OK**, AI giải thích dễ hiểu, tự hiểu ra đáp án. | Dễ hiểu nhưng sợ nếu không biết sai ở đâu thì không bôi đen được. | Option B xuất sắc về độ tức thì và tính thực dụng. |
-| **Friction / Vấn đề UI** | Chưa có form feedback, testcase chưa khai thác hết chức năng. | **UI hơi khó nhìn** để nhận biết vị trí AI vừa phản hồi. | **Không biết phải trượt (scroll) xuống** khi AI trả lời dài. | **Điểm nghẽn lớn nằm ở UI/UX hiển thị & điều hướng nội dung.** |
-| **Đề xuất nâng cấp** | Thêm Form Feedback, ngữ cảnh khó hơn, hỏi được code liên quan. | Làm nổi bật khu vực AI trả lời để dễ quan sát hơn. | Bổ sung **luồng tin nhắn chat liên tục (message thread)**. | Cần hội thoại tự nhiên, có feedback loop và visual cue rõ ràng. |
-| **Lựa chọn & Trade-off** | Muốn mở rộng scope $\leftrightarrow$ Sợ AI lan man. | Chọn **B** (nhanh, dễ hiểu) $\leftrightarrow$ Cần sửa UI cho dễ nhìn. | Chọn **A** (hiểu sâu) $\leftrightarrow$ Cần fix lỗi scroll & làm dạng chat. | **Pattern:** Không ai chọn C; A và B bổ sung hoàn hảo cho nhau. |
+* **Common Situation:** Học viên tự học lập trình Web / React vào ca đêm trên nền tảng VLearn, gặp lỗi logic trong component `UserProfile.jsx` làm `Test Case #2 FAILED` (State `user` không cập nhật khi `userId` thay đổi).
+* **Common Task:** Tự chẩn đoán nguyên nhân và chỉnh sửa mã nguồn sao cho toàn bộ Test Cases chuyển sang trạng thái PASS mà không nhận code giải sẵn.
+* **Content Fixture:** `useEffect(() => { fetchUserData(userId).then(data => setUser(data)); }, []);` (thiếu `userId` trong dependency array).
 
 ---
 
-## 2. Các Pattern Chung & Khác Biệt Giữa 3 Phiên
+## 2. Chi Tiết Quan Sát & Phản Hồi Từ 3 Tester
 
-### 2.1. Pattern chung (Tín hiệu lặp lại)
-1. **Giá trị cốt lõi của việc gợi ý tư duy (Socratic AI) được công nhận mạnh:** Nguyễn Quang Minh cực kỳ hào hứng muốn áp dụng thực tế, Hoàng Văn Thành và Bùi Hữu Nghĩa đều ghi nhận AI giải thích đúng trọng tâm bản chất thay vì quăng code làm sẵn.
-2. **Option B (Contextual Explainer) là cứu cánh tức thì:** Giải thích trực diện, giúp người học hiểu nhanh vấn đề (như Bùi Hữu Nghĩa đã pass test rất nhanh).
-3. **Sự thất thế của Option C:** Cả 3 Tester đều bỏ qua Option C cho tình huống tự học đêm do độ trễ 30 phút làm gãy đà học tập.
-4. **Vấn đề giao diện (UI/UX) là rào cản tương tác lớn nhất:** Bùi Hữu Nghĩa khó nhìn thấy vùng AI phản hồi, Nguyễn Quang Minh không biết phải scroll xuống để đọc tiếp.
-
-### 2.2. Khác biệt theo trình độ người học
-* **Người học nâng cao (Hoàng Văn Thành):** Cảm thấy "chật chội" khi AI bị khóa chặt trong một đoạn code lỗi, mong muốn ngữ cảnh khó hơn và khả năng trao đổi về các hàm xung quanh.
-* **Người học cơ bản (Bùi Hữu Nghĩa & Nguyễn Quang Minh):** Cần sự chỉ dẫn từng bước rõ ràng, giao diện trực quan và cơ chế cuộn/tin nhắn tự nhiên để không bị ngợp.
+```mermaid
+graph TD
+    T1["Tester 1: Hoàng Văn Thành (2A202601428)<br/>- Muốn context khó hơn & form feedback<br/>- AI bị giới hạn, muốn hỏi code xung quanh<br/>- Test cases chưa bung hết chức năng"]
+    T2["Tester 2: Bùi Hữu Nghĩa (2A202601880)<br/>- UI khó nhìn chỗ AI phản hồi<br/>- Option B OK, AI giải thích dễ hiểu<br/>- Nắm rõ vấn đề & tự tìm ra đáp án"]
+    T3["Tester 3: Nguyễn Quang Minh (2A202601955)<br/>- Thích gợi ý tư duy, muốn đem áp dụng<br/>- UI: Không biết phải cuộn xuống (scroll)<br/>- Muốn hội thoại liên tục dạng message"]
+```
 
 ---
 
-## 3. Next Change (Quyết Định Cải Tiến Cốt Lõi)
+### 👤 TESTER 1 — Hoàng Văn Thành (MHV: `2A202601428`)
 
-**Quyết định nhóm chốt:**
+* **Đặc điểm Tester:** Học viên có nền tảng lập trình khá, thích bài toán thực tế sâu rộng.
+* **Hành vi quan sát:** Thao tác rất nhanh, cố gắng mở rộng phạm vi test và thử hỏi AI về các hàm liên quan ngoài `useEffect` (như `fetchUserData`). Khi AI chỉ phản hồi giới hạn trong đoạn bug `useEffect`, tester cảm thấy bị bó hẹp.
 
-> 🎯 **Nâng cấp Hệ Thống Hybrid A+B với Giao Diện Chat Message Liên Tục & Trực Quan Hóa UI:**
-> 1. **Chuyển Option A thành Luồng Chat Message liên tục:** Thay thế các khối tĩnh bằng luồng tin nhắn hội thoại đối thoại từng bước, tích hợp hiệu ứng hiển thị mượt mà và **tính năng Auto-Scroll xuống tin nhắn mới nhất**.
-> 2. **Tối ưu hóa UI Vùng Phản Hồi:** Tăng độ tương phản, thêm hiệu ứng highlight và biểu tượng trạng thái rõ ràng để người học nhận biết ngay khi AI trả lời (giải quyết phản hồi của Bùi Hữu Nghĩa).
-> 3. **Tích hợp Form Feedback trực tiếp:** Bổ sung nút đánh giá chất lượng gợi ý (Thumbs up/down + ô góp ý nhanh) ngay dưới mỗi phản hồi của AI (theo đề xuất của Hoàng Văn Thành).
-> 4. **Giữ Option B như công cụ bổ trợ tại chỗ:** Cho phép người học bôi đen bất kỳ đoạn code nào để xem giải thích nhanh dạng popup mà không làm mất luồng chat chính.
-
----
-
-## 4. Evidence Dẫn Tới Quyết Định Này
-
-* **Phản hồi Nguyễn Quang Minh (2A202601955):** Khen ý tưởng gợi mở rất hay nhưng gặp lỗi không biết phải trượt (scroll) xuống và mong muốn có đoạn phản hồi liên tục dạng message $\rightarrow$ Căn cứ trực tiếp để làm Auto-Scroll và Chat Message Thread.
-* **Phản hồi Bùi Hữu Nghĩa (2A202601880):** Đánh giá Option B giải thích rất dễ hiểu, hiểu được vấn đề và đáp án nhưng phàn nàn UI hơi khó nhìn để check AI phản hồi $\rightarrow$ Căn cứ để tinh chỉnh vùng hiển thị UI nổi bật hơn và giữ vững Option B.
-* **Phản hồi Hoàng Văn Thành (2A202601428):** Phản hồi đề tài và câu trả lời AI bị giới hạn, test case chưa phát huy hết chức năng và đề xuất tạo form feedback $\rightarrow$ Căn cứ để bổ sung Form Feedback loop và chuẩn bị mở rộng test cases.
+| Khía cạnh | Chi tiết ghi nhận thực tế từ Hoàng Văn Thành |
+| :--- | :--- |
+| **First Action** | Đọc lướt qua Test Runner, xem cấu trúc file `UserProfile.jsx` và tìm kiếm các test case nâng cao khác. |
+| **Góp ý về Ngữ cảnh & Đề tài** | • Đề tài hiện tại còn hơi **bị giới hạn trong một bài tập hẹp**, các test case mẫu chưa phát huy hết chức năng kiểm thử của hệ thống.<br>• Mong muốn có **ngữ cảnh bài toán khó hơn**, đa dạng lỗi logic hơn để thử thách AI. |
+| **Phản hồi về AI Boundary** | • **AI bị giới hạn ở câu trả lời:** AI chỉ tập trung giải quyết và phản hồi đoạn code bị lỗi theo đúng đề tài của chương trình, trong khi tester muốn đặt câu hỏi ở các đoạn code liên quan xung quanh (như lifecycle, async data fetching). |
+| **Đề xuất tính năng** | Cần **tạo Form Feedback** trực tiếp ngay trong ứng dụng để người học đóng góp ý kiến về chất lượng câu hỏi của AI sau mỗi bài tập. |
+| **Exact Quote** | 🗣️ *“AI trả lời đúng trọng tâm lỗi bài này nhưng bị đóng khung quá. Mình muốn hỏi thêm về luồng dữ liệu xung quanh thì AI không mở rộng. Nên có thêm form feedback để đánh giá gợi ý của AI.”* |
 
 ---
 
-## 5. Still Unproven (Điều Vẫn Chưa Được Chứng Minh)
+### 👤 TESTER 2 — Bùi Hữu Nghĩa (MHV: `2A202601880`)
 
-1. **Rủi ro phân tâm khi mở rộng Scope:** Nếu cho phép AI trả lời mở rộng sang các đoạn code xung quanh (theo ý Hoàng Văn Thành), liệu AI có làm người học phân tâm khỏi mục tiêu cốt lõi của bài học hay không?
-2. **Cognitive Load trong luồng Chat liên tục:** Giao diện tin nhắn liên tục có khiến người học có cảm giác "lười đọc code" và chỉ chăm chú chat với AI hay không?
-3. **Tác động dài hạn (Long-term Retention):** Việc học qua gợi ý tư duy dạng chat có thực sự giúp người học nhớ lâu hơn sau 1-2 tuần so với việc đọc tài liệu truyền thống hay không?
+* **Đặc điểm Tester:** Học viên chú trọng tính trực quan, tập trung vào trải nghiệm sửa lỗi nhanh và rõ ràng.
+* **Hành vi quan sát:** Bị khựng lại khi AI đưa ra phản hồi vì mắt phải đảo qua lại giữa khung code và khung chat/pop-up; nhưng thao tác rất mượt với Option B.
+
+| Khía cạnh | Chi tiết ghi nhận thực tế từ Bùi Hữu Nghĩa |
+| :--- | :--- |
+| **First Action** | Chạy thử Test Runner, quan sát thông báo lỗi và bôi đen thử dòng code 15. |
+| **Phản hồi về Giao diện (UI)** | • **UI hơi khó nhìn để check phần AI phản hồi:** Vị trí hiển thị khung kết quả phân tích / tin nhắn AI chưa đủ nổi bật, độ tương phản và phân vùng giao diện khiến tester mất vài giây để nhận biết AI đã trả lời ở đâu. |
+| **Đánh giá Option B (Contextual Explainer)** | • **Đánh giá rất OK:** AI giải thích ngắn gọn, dễ hiểu, bám sát đúng chỗ bôi đen.<br>• Nhờ lời giải thích đúng ngữ cảnh, tester **hiểu rõ bản chất vấn đề** (thiếu dependency array) và tự sửa đúng code rất nhanh. |
+| **Lựa chọn & Trade-off** | Chọn **Option B** làm phương án yêu thích vì tính tức thì và dễ hiểu, nhưng lưu ý cần gom cụm giao diện phản hồi cho dễ quan sát hơn. |
+| **Exact Quote** | 🗣️ *“Option B giải thích rất dễ hiểu, mình đọc là biết ngay sai ở đâu để sửa. Nhưng UI chỗ AI trả về hơi khó nhìn, lúc đầu mình không để ý nó nhảy phản hồi ở góc nào.”* |
 
 ---
 
-## 6. Tự Kiểm — GATE 5: Learning, Not Praise
+### 👤 TESTER 3 — Nguyễn Quang Minh (MHV: `2A202601955`)
 
-| Tiêu chí | Trạng thái | Minh chứng cụ thể |
-| :--- | :---: | :--- |
-| **Có đủ Feedback Notes độc lập từ 3 Tester** | ✅ Đạt | Đầy đủ dữ liệu chi tiết từ Hoàng Văn Thành, Bùi Hữu Nghĩa, Nguyễn Quang Minh. |
-| **Nêu bật được Pattern và Khác biệt cụ thể** | ✅ Đạt | Phân tích rõ khác biệt giữa người học nâng cao vs. cơ bản và các lỗi UI chung. |
-| **Chốt một Next Change khả thi, gắn liền với Evidence** | ✅ Đạt | Chốt nâng cấp Chat Message liên tục + Auto Scroll + UI Highlight + Form Feedback. |
-| **Xác định trung thực điều STILL UNPROVEN** | ✅ Đạt | Thừa nhận chưa kiểm chứng được Cognitive Load và tác động dài hạn. |
-| **Không dùng lời khen sáo rỗng** | ✅ Đạt | Mọi kết luận đều bắt nguồn từ hành vi thực tế, chỗ dừng và trade-off của 3 tester. |
+* **Đặc điểm Tester:** Học viên tự học, rất tâm đắc với phương pháp gợi mở tư duy (Socratic method).
+* **Hành vi quan sát:** Hào hứng với Option A, đọc kỹ từng câu hỏi gợi ý; gặp lỗi giao diện khi nội dung phản hồi dài bị che khuất bên dưới màn hình.
 
-**→ Đã hoàn thành tổng hợp nhóm và đạt 100% chuẩn Gate 5.**
+| Khía cạnh | Chi tiết ghi nhận thực tế từ Nguyễn Quang Minh |
+| :--- | :--- |
+| **First Action** | Bấm ngay nút *“Cần gợi ý tư duy”* (Option A) và đọc từng dòng micro-copy hướng dẫn. |
+| **Trải nghiệm tổng quan** | • Đánh giá sản phẩm **rất dễ dùng, ý tưởng khá hay** và cực kỳ thích cách tiếp cận gợi ý tư duy thay vì đưa đáp án hoàn chỉnh.<br>• Rất **mong muốn lấy giải pháp/ý tưởng này để áp dụng** vào thực tế học tập và giảng dạy. |
+| **Vấn đề UI (Friction Point)** | • **Người dùng không biết phải trượt (scroll) xuống:** Khi đoạn phản hồi của AI dài ra, khung giao diện không có thanh cuộn hoặc chỉ dẫn trực quan khiến tester nghĩ rằng nội dung đã hết, không thấy được câu hỏi tiếp theo ở phía dưới. |
+| **Đề xuất nâng cấp tương tác** | • Mong muốn bổ sung **đoạn phản hồi liên tục như một luồng tin nhắn (Chat Message Thread / Streaming):** Thay vì hiển thị từng khối tĩnh, hệ thống nên có hiệu ứng tin nhắn trò chuyện đối thoại liên tục để tạo cảm giác tự nhiên và liền mạch. |
+| **Exact Quote** | 🗣️ *“Ý tưởng gợi mở tư duy này cực kỳ hay, mình muốn đem áp dụng ngay! Chỉ có điều lúc AI trả lời dài mình không biết là phải cuộn chuột xuống dưới. Nếu làm nó thành luồng chat message nhắn liên tục thì tuyệt vời.”* |
+
+---
+
+## 3. Tổng Hợp So Sánh 3 Phương Án Qua 3 Tester
+
+| Tiêu chí | Option A (Socratic Hints AI) | Option B (Contextual Explainer) | Option C (Fast SLA Q&A) |
+| :--- | :--- | :--- | :--- |
+| **Đánh giá chung từ 3 Tester** | Ý tưởng được khen nhiều nhất (Nguyễn Quang Minh rất thích), nhưng cần cải thiện UX nhập liệu/cuộn trang và hội thoại liền mạch. | Được đánh giá thực dụng và dễ hiểu nhất (Bùi Hữu Nghĩa khen OK, hiểu ngay vấn đề và sửa được code). | Không được chọn làm phương án chính vì độ trễ, nhưng hữu ích khi muốn tạo form feedback / hỏi sâu. |
+| **Friction / Pain Points chính** | • UI không tự scroll xuống khi nội dung dài (Nguyễn Quang Minh).<br>• Bị bó hẹp ở bài tập hiện tại, chưa hỏi được code xung quanh (Hoàng Văn Thành). | • UI khó nhận biết vị trí AI phản hồi (Bùi Hữu Nghĩa).<br>• Phụ thuộc vào việc bôi đen đúng chỗ. | • Chờ đợi 30 phút trong ca đêm là quá lâu. |
+| **Tỷ lệ ưu tiên giữ lại** | **2 / 3** Tester mong muốn giữ luồng gợi ý tư duy (Option A) nhưng kết hợp phản hồi nhanh (Option B). | **3 / 3** Tester đồng ý Option B giải thích rất dễ hiểu và sửa bug nhanh nhất. | **0 / 3** Tester chọn C làm giải pháp số 1. |
+
+---
+
+## 4. Tách Bạch 4 Tầng Tư Duy (4-Layer Synthesis)
+
+### 1. OBSERVED (Sự thật & Hành vi ghi nhận - Fact-First)
+* **Hoàng Văn Thành (2A202601428):** Phàn nàn AI chỉ trả lời trong phạm vi hẹp của bài tập, muốn mở rộng hỏi code liên quan; đề xuất tạo Form Feedback và test case đa dạng hơn.
+* **Bùi Hữu Nghĩa (2A202601880):** Gặp khó khăn khi nhìn vị trí AI phản hồi trên UI; đánh giá Option B giải thích rất dễ hiểu và giúp hiểu ra đáp án ngay.
+* **Nguyễn Quang Minh (2A202601955):** Khen ý tưởng gợi mở tư duy rất hay và muốn mang áp dụng; gặp lỗi không biết phải cuộn (scroll) xuống; đề xuất luồng chat message phản hồi liên tục.
+
+### 2. INTERPRETED (Diễn giải ý nghĩa & Rào cản người học)
+* **Về mặt UI/UX:** Giao diện phản hồi đang có điểm nghẽn (Friction) lớn về hiển thị: (1) Thiếu tín hiệu nhận biết khu vực AI vừa trả lời, (2) Thiếu auto-scroll hoặc visual cues khi nội dung dài vượt khung nhìn.
+* **Về phạm vi hỗ trợ của AI (Scope & Agency):** Người học có nhu cầu phân hóa: Người mới cần dẫn dắt từng bước (Socratic), người có kinh nghiệm muốn hỏi rộng ra toàn bộ component (Context Expansion). Việc khóa AI quá chặt trong 1 bug gây cảm giác gò bó.
+* **Về hình thức tương tác:** Giao diện tĩnh dạng khối (block) gây đứt mạch cảm xúc; hình thức hội thoại tin nhắn liên tục (Chat Message Thread) phù hợp với mental model tự nhiên của người học hơn.
+
+### 3. DECIDED — NEXT CHANGE (Hành động điều chỉnh tiếp theo)
+Nhóm chốt **4 thay đổi cụ thể cho phiên bản tiếp theo:**
+1. **Sửa lỗi cuộn & Visual Cues (Fix UI):** Thêm tính năng tự động cuộn xuống tin nhắn mới nhất (`auto-scroll to bottom`) và thêm chỉ báo cuộn (scroll indicator) khi có nội dung bên dưới.
+2. **Làm nổi bật vùng AI phản hồi (High-contrast UI Area):** Tinh chỉnh layout để vùng AI phản hồi có animation xuất hiện rõ ràng, dễ nhìn hơn đối với cả Option A và Option B.
+3. **Nâng cấp luồng gợi ý thành Chat Message liên tục:** Chuyển đổi giao diện Option A từ dạng thẻ rời rạc sang dạng luồng tin nhắn trò chuyện tương tác nhiều lượt (Conversational Thread).
+4. **Tích hợp Form Feedback & Mở rộng phạm vi test case:** Thêm nút/form đánh giá phản hồi của AI sau mỗi bước gợi ý; chuẩn bị kịch bản test case phong phú hơn cho các bài tiếp theo.
+
+### 4. STILL UNPROVEN (Điều vẫn chưa chứng minh được)
+* Khi mở rộng phạm vi cho AI giải thích code xung quanh, liệu AI có bị "lan man" (hallucination/drift) dẫn đến làm loãng mục tiêu chính của bài tập hay không?
+* Việc chuyển sang luồng tin nhắn chat liên tục có khiến người học ỷ lại vào việc chat với AI thay vì tập trung vào code editor hay không?
+
+---
+
+## 5. Kết Luận & Kế Hoạch Bàn Giao
+
+* Bản ghi chép đã tổng hợp trung thực toàn bộ phản hồi từ **Hoàng Văn Thành**, **Bùi Hữu Nghĩa**, và **Nguyễn Quang Minh**, chỉ rõ ưu điểm và khiếm khuyết cụ thể của từng phương án trên phương diện giao diện (UI/UX) và cơ chế hỗ trợ (Mechanism).
+* Kết quả này là cơ sở trực tiếp để cập nhật tài liệu tổng hợp nhóm `group-feedback-synthesis.md` và tinh chỉnh mã nguồn Prototype.
