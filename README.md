@@ -1,22 +1,22 @@
 # Track 1 - Day 18: Multiple Prototypes — Human–AI Design
 
-**Họ và tên:** Nguyễn Văn Tuấn Anh  
-**Mã học viên (MHV):** 2A202601813  
+**Họ và tên:** Phạm Bá Huy  
+**Mã học viên (MHV):** 2A202601132  
 **Nhóm:** Chicken Plus (2 thành viên)  
-**Đồng đội:** Phạm Bá Huy (MHV: 2A202601132)  
+**Đồng đội:** Nguyễn Văn Tuấn Anh (MHV: 2A202601813)  
 **Case Study:** AI Support Radar trên nền tảng VLearn (Chẩn đoán & hỗ trợ bế tắc bài tập `useEffect`)  
-**Repo GitHub:** `ngovan15121977-bit/K3-Track1-Lab18-2A202601813-NguyenVanTuanAnh`
+**Repo GitHub:** `phambahuycv/K4-Track1-Lab17-2A202601132-PhamBaHuy`
 
 ---
 
 ## 1. Thông tin cá nhân và nhóm
 
-- **MHV:** 2A202601813
-- **Họ tên:** Nguyễn Văn Tuấn Anh
+- **MHV:** 2A202601132
+- **Họ tên:** Phạm Bá Huy
 - **Tên nhóm:** Chicken Plus
 - **Thành viên:**
-  1. Nguyễn Văn Tuấn Anh — 2A202601813
-  2. Phạm Bá Huy — 2A202601132
+  1. Phạm Bá Huy — 2A202601132 (Lead / Technical & Prototyping)
+  2. Nguyễn Văn Tuấn Anh — 2A202601813 (Design & Research)
 - **Case:** AI Support Radar / Diagnostic support khi học viên bị kẹt bài tập React Hooks (`useEffect`) trên VLearn
 
 ---
@@ -29,7 +29,7 @@
 - Teo (phỏng vấn bởi Huy): mất ~40 phút, trải qua 3 lần thử sai mới nhận ra thiếu kiến thức nền; hỏi ChatGPT thì phát sinh thêm thuật ngữ lạ.
 - Thành (phỏng vấn bởi Tuấn Anh): nhận đáp án đầy đủ từ AI nhưng mất tư duy, phải tự “ép” AI giải thích từng bước.
 
-**Điều vẫn chưa được chứng minh:** Claim “âm thầm bỏ học” (silent drop-out) chưa có evidence trực tiếp từ 2 Practice Notes.
+**Điều vẫn chưa được chứng minh:** Claim “âm thầm bỏ học” (silent drop-out) chưa có evidence trực tiếp từ các Practice Notes.
 
 ---
 
@@ -53,30 +53,35 @@ Chi tiết so sánh mechanism, agency, trade-off và Human–AI Decision Table: 
 
 ## 4. Đóng góp của tôi trong nhóm
 
-- **Option chính chịu trách nhiệm:** Option A (Socratic Hints AI) — thiết kế luồng hỏi gợi mở, expectation micro-copy, control/recovery.
-- **Shared work:**
-  - Cùng Huy chốt Hypothesis Problem từ 2 Practice Notes Day 17 (Evidence Huddle).
-  - Cùng xây Comparison Contract (user, situation, task, content fixture `useEffect` bug).
-  - Tham gia Human–AI Design Pass cho cả 3 options (Expectation, Agency, Evidence/Uncertainty, Control & Recovery).
-  - Viết / chuẩn hóa Design Sheet và các artifact Day 18.
-  - Dùng chung **prototype web A/B/C** do Huy build (repo `phambahuycv/K4-Track1-Lab17-.../prototype`) — có 9 test cases + facilitator notes + reset path.
-- **Facilitation & quan sát:** Facilitate 1 phiên A/B/C test với tester ngoài nhóm; ghi `prototype-feedback-note.md`.
-- **Tổng hợp:** Đóng góp vào `group-feedback-synthesis.md` (pattern, Next Change, Still Unproven).
+- **Lập trình & Xây dựng Prototype chung (Technical & Prototyping Lead):**
+  - Trực tiếp thiết kế và lập trình toàn bộ **khung giao diện 70% Shared Core** (VLearn Platform Layout, Monaco Editor `UserProfile.jsx`, Video Player mốc `04:12`, và Test Runner mô phỏng).
+  - Hiện thực hóa 3 luồng Critical Interaction cho cả 3 Option (Option A: Socratic Hints AI đối thoại từng bước; Option B: Contextual Explainer bôi đen code/video pop-up; Option C: Fast SLA Q&A tạo ticket có bộ đếm ngược SLA 30 phút).
+  - Tích hợp **bộ chuyển đổi tab A/B/C**, nút **Reset Scenario**, và xây dựng thanh điều hướng trực tiếp **9 Test Cases** chuẩn mực để phục vụ kiểm thử.
+- **Shared work (Cùng Tuấn Anh):**
+  - Cùng phân tích dữ liệu Day 17 (Evidence Huddle), xác định các khoảng trống dữ liệu và thống nhất chốt **Hypothesis Problem**.
+  - Xây dựng **Comparison Contract** đảm bảo giữ nguyên 70% nền tảng (Target User, Situation, Task, Content Fixture `useEffect`).
+  - Tham gia **Human–AI Design Pass** cho cả 3 options (xác định Expectation, Agency Act/Ask/Don't Act, Evidence & Uncertainty, Control & Recovery).
+  - Xây dựng các tài liệu Chặng 1 đến Chặng 6 (`CP1_D18.md` đến `CP6_D18.md`) và hoàn thiện `three-option-design-sheet.md`.
+- **Facilitation & Quan sát thực địa:**
+  - Chuẩn bị kịch bản và chủ trì phiên kiểm thử thực tế với Tester ngoài nhóm (Hoàng Văn Thành, Bùi Hữu Nghĩa, Nguyễn Quang Minh) tuân thủ nghiêm ngặt 6 Luật Facilitation và 3 câu cứu hộ.
+  - Ghi nhận biên bản quan sát hành vi Fact-First và tổng hợp 4 tầng tư duy (Observed / Interpreted / Decided / Still Unproven) vào file `prototype-feedback-note.md`.
+- **Tổng hợp & Chốt định hướng cải tiến nhóm:**
+  - Cùng nhóm xây dựng `group-feedback-synthesis.md`, phân tích Cross-Feedback Matrix, xác định các điểm nghẽn UI (lỗi cuộn trang, vùng AI phản hồi khó nhìn) và chốt **Next Change** (Hybrid A+B dạng Chat Message Streaming liên tục + Auto-Scroll + Form Feedback).
 
 ---
 
 ## 5. Prototype Feedback (tóm tắt)
 
-**Phiên do tôi facilitate:** 1 tester ngoài nhóm trải nghiệm cả A → B → C với cùng task (sửa bug `useEffect` thiếu dependency array).
+**Tổng hợp từ 3 Tester ngoài nhóm (Hoàng Văn Thành, Bùi Hữu Nghĩa, Nguyễn Quang Minh):**
 
 **Observation chính (xem chi tiết trong `prototype-feedback-note.md`):**
-- Option A: Tester đọc hết 2–3 câu hỏi gợi mở, tự nhận ra thiếu dependency → sửa được code; cảm thấy “hiểu hơn” nhưng mất thời gian hơn.
-- Option B: Nhanh, sát chỗ bôi đen; nhưng tester đôi khi không chắc mình nên bôi đen đoạn nào.
-- Option C: Tin tưởng độ chính xác cao, nhưng không muốn chờ 30 phút khi đang “đang code dở”.
+- **Tester 1 (Hoàng Văn Thành - 2A202601428):** Đánh giá AI trả lời đúng trọng tâm nhưng bị giới hạn trong 1 bug hẹp; mong muốn ngữ cảnh khó hơn, hỏi được code xung quanh và đề xuất thêm Form Feedback.
+- **Tester 2 (Bùi Hữu Nghĩa - 2A202601880):** Khen Option B giải thích rất dễ hiểu, giúp hiểu bản chất và tự pass test nhanh; phản hồi UI hơi khó nhìn để check vị trí AI phản hồi.
+- **Tester 3 (Nguyễn Quang Minh - 2A202601955):** Rất thích ý tưởng gợi mở tư duy (Option A), muốn mang đi áp dụng; gặp lỗi UI không biết phải trượt (scroll) xuống; đề xuất luồng tin nhắn chat liên tục.
 
 **Group Synthesis (xem `group-feedback-synthesis.md`):**
-- **Next Change:** Kết hợp A + B — AI gợi mở Socratic + cho phép user bôi đen để “nhảy” sang giải thích phạm vi khi cần.
-- **Still Unproven:** Chưa đủ data về việc user có bỏ cuộc khi AI đoán sai 2–3 lần liên tiếp; chưa test với user không quen React.
+- **Next Change:** Nâng cấp giải pháp Hybrid A+B: Chuyển Option A sang dạng **Chat Message liên tục có Auto-Scroll**, làm nổi bật vùng AI phản hồi, tích hợp **Form Feedback** đánh giá gợi ý và giữ Option B làm công cụ giải thích tức thì tại chỗ.
+- **Still Unproven:** Cần kiểm chứng rủi ro phân tâm khi AI mở rộng phạm vi giải thích code xung quanh và tải nhận thức (cognitive load) khi học viên chat liên tục với AI.
 
 ---
 
@@ -94,14 +99,15 @@ Tóm tắt:
 ## Cấu trúc repo
 
 ```text
-Track1_Day18_2A202601813_NguyenVanTuanAnh/
+K4-Track1-Lab17-2A202601132-PhamBaHuy/
 ├── README.md
 ├── three-option-design-sheet.md
 ├── prototype-link.md
 ├── prototype-feedback-note.md
 ├── group-feedback-synthesis.md
 ├── ai-support-log.md
-└── (tham khảo) Day18_CP1 / CP2 / CP3 — bản làm việc chi tiết các chặng
+├── prototype/ (index.html, style.css, app.js, README.md)
+└── interview/ (CP1_D18.md, CP2_D18.md, CP3_D18.md, CP4_D18.md, CP5_D18.md, CP6_D18.md, notes.md, recording-link.md)
 ```
 
 ---
@@ -113,5 +119,5 @@ Track1_Day18_2A202601813_NguyenVanTuanAnh/
 | 1. Evidence Continuity | Đạt — Hypothesis nối quote Day 17 + ghi rõ điều chưa biết |
 | 2. Meaningful Options | Đạt — A/B/C khác mechanism & role split |
 | 3. Human Control | Đạt — mỗi option có Expectation, Agency, Evidence/Uncertainty, Control & Recovery |
-| 4. Test-ready | Cần cập nhật link prototype thật; Feedback Note đã có cấu trúc quan sát |
-| 5. Learning | Đạt — có Feedback Note + Synthesis + Next Change + Still Unproven |
+| 4. Test-ready | Đạt — Prototype web A/B/C hoàn chỉnh kèm 9 Test Cases + Reset Path |
+| 5. Learning | Đạt — Có 3 Feedback Notes + Synthesis + Next Change + Still Unproven |
